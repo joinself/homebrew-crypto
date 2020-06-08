@@ -7,6 +7,7 @@ class LibselfOlm < Formula
   sha256 "2c9c4ead02621d353eeb7754e5d708a1fcc15d1c1843310a2e6e6591994aa4e0"
 
   depends_on "cmake" => :build
+  depends_on "libsodium" => :build
 
   def install
     system "cmake", ".", "-Bbuild", "-DCMAKE_INSTALL_PREFIX=#{prefix}"
