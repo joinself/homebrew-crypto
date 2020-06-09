@@ -64,7 +64,7 @@ end
 # of your formula. This download strategy uses GitHub access tokens (in the
 # environment variables HOMEBREW_GITHUB_API_TOKEN) to sign the request.
 class CustomGitHubPrivateRepositoryReleaseDownloadStrategy < CustomGitHubPrivateRepositoryDownloadStrategy
-  require 'net/http'
+  require "net/http"
 
   def initialize(url, name, version, **meta)
     super
@@ -73,15 +73,14 @@ class CustomGitHubPrivateRepositoryReleaseDownloadStrategy < CustomGitHubPrivate
   def parse_url_pattern
     url_pattern = %r{https://github.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(\S+)}
     raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release." unless @url.match? url_pattern
+
     _, @owner, @repo, @tag, @filename = *@url.match(url_pattern)
   end
 
   def download_url
-    # "https://#{@github_token}@api.github.com/repos/#{@owner}/#{@repo}/releases/assets/#{asset_id}"
-    # blah = curl_output "--header", "Accept: application/octet-stream", "--header", "Authorization: token #{@github_token}", "-I"
     uri = URI("https://api.github.com/repos/#{@owner}/#{@repo}/releases/assets/#{asset_id}")
     req = Net::HTTP::Get.new(uri)
-    req["Accept"] = 'application/octet-stream'
+    req["Accept"] = "application/octet-stream"
     req["Authorization"] = "token #{@github_token}"
 
     res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == "https") do |http|
