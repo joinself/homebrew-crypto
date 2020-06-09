@@ -12,6 +12,8 @@ class LibselfOmemo < Formula
 
   def install
     system "cargo", "build", "--release"
+    system "cp", "self_omemo.h", "#{prefix}/include"
+    system "cp", "target/release/libself_omemo.dylib", "#{prefix}/lib"
   end
 
   test do
