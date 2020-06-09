@@ -19,7 +19,7 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   end
 
   def parse_url_pattern
-    unless match = url.match(%r{https://github.com/([^/]+)/([^/]+)/(\S+)})
+    unless (match = url.match(%r{https://github.com/([^/]+)/([^/]+)/(\S+)}))
       raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Repository."
     end
 
@@ -32,7 +32,7 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
 
   private
 
-  def _fetch(url:, resolved_url:)
+  def _fetch(*)
     curl_download download_url, "--header", "Authorization: token #{@github_token}", :to => temporary_path
   end
 
@@ -72,31 +72,28 @@ class CustomGitHubPrivateRepositoryReleaseDownloadStrategy < CustomGitHubPrivate
 
   def parse_url_pattern
     url_pattern = %r{https://github.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(\S+)}
-    unless @url =~ url_pattern
-      raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release."
-    end
-
+    raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release." unless @url match? url_pattern
     _, @owner, @repo, @tag, @filename = *@url.match(url_pattern)
   end
 
   def download_url
-    #"https://#{@github_token}@api.github.com/repos/#{@owner}/#{@repo}/releases/assets/#{asset_id}"
-    #blah = curl_output "--header", "Accept: application/octet-stream", "--header", "Authorization: token #{@github_token}", "-I"
+    # "https://#{@github_token}@api.github.com/repos/#{@owner}/#{@repo}/releases/assets/#{asset_id}"
+    # blah = curl_output "--header", "Accept: application/octet-stream", "--header", "Authorization: token #{@github_token}", "-I"
     uri = URI("https://api.github.com/repos/#{@owner}/#{@repo}/releases/assets/#{asset_id}")
     req = Net::HTTP::Get.new(uri)
-    req['Accept'] = 'application/octet-stream'
-    req['Authorization'] = "token #{@github_token}"
+    req["Accept"] = 'application/octet-stream'
+    req["Authorization"] = "token #{@github_token}"
 
-    res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+    res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == "https") do |http|
       http.request(req)
     end
 
-    res['location']
+    res["location"]
   end
 
   private
 
-  def _fetch(url:, resolved_url:)
+  def _fetch(*)
     # HTTP request header `Accept: application/octet-stream` is required.
     # Without this, the GitHub API will respond with metadata, not binary.
     curl_download download_url, "--header", "Accept: application/octet-stream", to: temporary_path
