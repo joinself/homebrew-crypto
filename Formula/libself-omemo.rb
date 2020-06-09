@@ -1,4 +1,4 @@
-require_relative "custom_download_strategy.rb"
+require_relative "../lib/custom_download_strategy.rb"
 
 class LibselfOmemo < Formula
   desc "Omemo for selfs implementation of olm"
