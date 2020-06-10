@@ -6,6 +6,12 @@ class LibselfOmemo < Formula
   url "https://github.com/aldgate-ventures/self-omemo/archive/0.1.2.tar.gz", :using => CustomGitHubPrivateRepositoryDownloadStrategy
   sha256 "78326c487dd5afcabe170d09b2e116a3cac43f008836f3b3ea9cfc3657985740"
 
+  bottle do
+    root_url "https://dl.bintray.com/selfid/bottles-crypto"
+    cellar :any
+    sha256 "985206fb61b6e9006027eba76bc30d120c16099caf0f56ee8ce26f41c32575bb" => :catalina
+  end
+
   depends_on "rust" => :build
   depends_on "libself-olm"
   depends_on "libsodium"
