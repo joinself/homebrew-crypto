@@ -1,4 +1,4 @@
-// Copyright 2020 Self Group Ltd. All Rights Reserved.
+# Copyright 2020 Self Group Ltd. All Rights Reserved.
 
 require "download_strategy"
 
