@@ -42,9 +42,9 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   end
 
   def set_github_token
-    @github_token = ENV["HOMEBREW_GITHUB_API_TOKEN"]
+    @github_token = ENV["GITHUB_TOKEN"]
     unless @github_token
-      raise CurlDownloadStrategyError, "Environmental variable HOMEBREW_GITHUB_API_TOKEN is required."
+      raise CurlDownloadStrategyError, "Environmental variable GITHUB_TOKEN is required."
     end
 
     validate_github_repository_access!
