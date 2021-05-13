@@ -53,7 +53,7 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   def validate_github_repository_access!
     # Test access to the repository
     GitHub.repository(@owner, @repo)
-  rescue GitHub::HTTPNotFoundError
+  rescue # GitHub::HTTPNotFoundError
     # We only handle HTTPNotFoundError here,
     # becase AuthenticationFailedError is handled within util/github.
     message = <<~EOS
