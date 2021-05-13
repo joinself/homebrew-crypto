@@ -18,9 +18,7 @@ class LibselfOmemo < Formula
   depends_on "libsodium"
 
   def install
-    system "cargo", "build", "--release"
-    lib.install "target/release/libself_omemo.dylib"
-    include.install "self_omemo.h"
+    system "cargo", "install"
   end
 
   test do

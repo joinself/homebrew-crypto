@@ -1,3 +1,6 @@
+# typed: false
+# frozen_string_literal: true
+
 # Copyright 2020 Self Group Ltd. All Rights Reserved.
 
 require "download_strategy"
@@ -35,7 +38,7 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   private
 
   def _fetch(*)
-    curl_download download_url, "--header", "Authorization: token #{@github_token}", :to => temporary_path
+    curl_download download_url, "--header", "Authorization: token #{@github_token}", to: temporary_path
   end
 
   def set_github_token
@@ -68,10 +71,6 @@ end
 class CustomGitHubPrivateRepositoryReleaseDownloadStrategy < CustomGitHubPrivateRepositoryDownloadStrategy
   require "net/http"
 
-  def initialize(url, name, version, **meta)
-    super
-  end
-
   def parse_url_pattern
     url_pattern = %r{https://github.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(\S+)}
     raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release." unless @url.match? url_pattern
@@ -85,7 +84,7 @@ class CustomGitHubPrivateRepositoryReleaseDownloadStrategy < CustomGitHubPrivate
     req["Accept"] = "application/octet-stream"
     req["Authorization"] = "token #{@github_token}"
 
-    res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == "https") do |http|
+    res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
       http.request(req)
     end
 
