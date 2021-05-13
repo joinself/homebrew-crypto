@@ -23,7 +23,7 @@ jobs:
           restore-keys: ${{ runner.os }}-rubygems-
       - name: Install Homebrew Bundler RubyGems
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
       - run: brew test-bot --only-cleanup-before
