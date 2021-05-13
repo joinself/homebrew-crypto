@@ -43,9 +43,7 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
 
   def set_github_token
     @github_token = ENV["GITHUB_TOKEN"]
-    unless @github_token
-      raise CurlDownloadStrategyError, "Environmental variable GITHUB_TOKEN is required."
-    end
+    raise CurlDownloadStrategyError, "Environmental variable GITHUB_TOKEN is required." unless @github_token
 
     validate_github_repository_access!
   end
