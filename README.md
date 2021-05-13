@@ -7,7 +7,7 @@ Or `brew tap selfid-net/crypto` and then `brew install <formula>`.
 
 Or install via URL (which will not receive updates):
 
-```
+```sh
 brew install https://raw.githubusercontent.com/selfid-net/homebrew-crypto/master/Formula/<formula>.rb
 ```
 
