@@ -5,8 +5,8 @@ require_relative "../lib/custom_download_strategy"
 class LibselfOlm < Formula
   desc "Self fork of olm"
   homepage "https://joinself.com"
-  url "https://github.com/joinself/self-olm/archive/0.1.27.tar.gz", using: CustomGitHubPrivateRepositoryDownloadStrategy
-  sha256 "d5ee1c5578776382a489902fceb735a2a5548dbe4b2a02ec243fc8d5ba5046cd"
+  url "https://github.com/joinself/self-olm/archive/0.1.28.tar.gz", using: CustomGitHubPrivateRepositoryDownloadStrategy
+  sha256 "b7f974ee400697a548bde9001cd0ae56d8982224863bcd35eb4bb70bbd7d5b29"
 
   depends_on "cmake" => :build
   depends_on "libsodium"
