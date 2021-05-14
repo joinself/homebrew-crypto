@@ -4,20 +4,20 @@ require_relative "../lib/custom_download_strategy"
 
 class LibselfOlm < Formula
   desc "Self fork of olm"
-  homepage "https://selfid.net"
-  url "https://github.com/aldgate-ventures/self-olm/archive/0.1.17.tar.gz", using: CustomGitHubPrivateRepositoryDownloadStrategy
-  sha256 "90b7bef7dab491cefe3f7a76d52c2ceb4c22df5535641bb3da1aaa0ec74b5b77"
+  homepage "https://joinself.com"
+  url "https://github.com/joinself/self-olm/archive/0.1.28.tar.gz", using: CustomGitHubPrivateRepositoryDownloadStrategy
+  sha256 "b7f974ee400697a548bde9001cd0ae56d8982224863bcd35eb4bb70bbd7d5b29"
 
   bottle do
-    root_url "https://dl.bintray.com/selfid/bottles-crypto"
-    sha256 cellar: :any, catalina: "3d5c926cb7eccc312c9d6c93ebad275b08c396c4f4fc1c9da84378d86b3f5cc1"
+    root_url "https://github.com/joinself/homebrew-crypto/releases/download/libself-olm-0.1.28"
+    sha256 cellar: :any, catalina: "920b6f985749c2f2faca7c3ef0446f7c50c0c727ae5a7e08e34911ee41e9b864"
   end
 
   depends_on "cmake" => :build
   depends_on "libsodium"
 
   def install
-    system "cmake", ".", "-Bbuild", "-DCMAKE_INSTALL_PREFIX=#{prefix}"
+    system "cmake", ".", "-Bbuild", "-DCMAKE_INSTALL_PREFIX=#{prefix}", *std_cmake_args
     system "cmake", "--build", "build", "--target", "install"
   end
 
