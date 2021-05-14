@@ -13,3 +13,6 @@ brew install https://raw.githubusercontent.com/selfid-net/homebrew-crypto/master
 
 ## Documentation
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
+
+## Publishing
+Publishing of this repo is handled by github actions
