@@ -56,6 +56,7 @@ class CustomGitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   rescue # GitHub::HTTPNotFoundError
     # We only handle HTTPNotFoundError here,
     # becase AuthenticationFailedError is handled within util/github.
+    puts "-------------------------CAUGHTTHISERROR"
     message = <<~EOS
       HOMEBREW_GITHUB_API_TOKEN can not access the repository: #{@owner}/#{@repo}
       This token may not have permission to access the repository or the url of formula may be incorrect.
