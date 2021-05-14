@@ -27,11 +27,9 @@ jobs:
       - run: brew test-bot --only-cleanup-before
       - run: brew test-bot --only-setup
       - run: brew test-bot --only-tap-syntax
-      - name: Build Bottle
-        run: brew test-bot --only-formulae
-        with:
-          access_token: ${{ secrets.access_token }}
+      - run: brew test-bot --only-formulae
         env:
+          LIBRARY_PATH: /usr/local/lib
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.access_token }}
         if: github.event_name == 'pull_request'
       - name: Upload bottles as artifact
