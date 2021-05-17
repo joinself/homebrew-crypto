@@ -12,9 +12,9 @@ class LibselfOmemo < Formula
     root_url "https://github.com/joinself/homebrew-crypto/releases/download/libself-omemo-0.1.2"
     rebuild 1
     sha256 cellar: :any, catalina: "61cbb122b388acf2ab58e772c2f38b814ae4199e5b5af5bdfb6d2c64f6555bd5"
-   end
+  end
 
-  depends_on "rust" => :build
+  depends_on "rust" # => :build
   depends_on "libself-olm"
   depends_on "libsodium"
 
