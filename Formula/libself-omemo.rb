@@ -10,6 +10,7 @@ class LibselfOmemo < Formula
 
   depends_on "libself-olm"
   depends_on "libsodium"
+  depends_on "llvm" => :build
   depends_on "rust" => :build
 
   def install
