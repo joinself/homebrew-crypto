@@ -8,9 +8,10 @@ class LibselfOmemo < Formula
   url "https://github.com/joinself/self-omemo/archive/0.1.2.tar.gz"
   sha256 "78326c487dd5afcabe170d09b2e116a3cac43f008836f3b3ea9cfc3657985740"
 
-  depends_on "rust" => :build
   depends_on "libself-olm"
   depends_on "libsodium"
+  depends_on "llvm"
+  depends_on "rust" => :build
 
   def install
     system "cargo", "build", "--release"
