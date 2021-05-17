@@ -28,6 +28,7 @@ jobs:
       - run: brew test-bot --only-setup
       - run: brew test-bot --only-formulae
         env:
+          PATH: /usr/local/opt/llvm/bin:$PATH
           LIBRARY_PATH: /usr/local/lib
         if: github.event_name == 'pull_request'
       - name: Upload bottles as artifact
