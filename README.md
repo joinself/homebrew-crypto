@@ -15,11 +15,10 @@ brew install https://raw.githubusercontent.com/selfid-net/homebrew-crypto/master
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
 
 ## Publishing
-~~Publishing of this repo is handled by github actions~~
+Publishing of this repo is handled by github actions
 
-Github actions is broken, as it fails to validate the url (as it's not publicly accessible). You will have to build the bottles for this repo manually and then publish them to github releases.
-
-#### Building the bottles locally
+## Building the bottles locally
+If Github Actions is broken, you will have to build the bottles for this repo manually and then publish them to github releases.
 ```
 brew install --verbose --build-bottle joinself/crypto/libself-olm
 brew bottle --verbose --json joinself/crypto/libself-olm --root-url=https://github.com/joinself/homebrew-crypto/releases/download/libself-olm-0.1.28
