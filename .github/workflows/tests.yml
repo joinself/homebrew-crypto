@@ -29,7 +29,6 @@ jobs:
       - run: brew test-bot --only-formulae
         env:
           LIBRARY_PATH: /usr/local/lib
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.access_token }}
         if: github.event_name == 'pull_request'
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
