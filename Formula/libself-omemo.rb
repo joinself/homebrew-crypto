@@ -18,15 +18,11 @@ class LibselfOmemo < Formula
   depends_on "libself-olm"
   depends_on "libsodium"
 
-  # rubocop:disable FormulaAudit
-
   def install
     system "cargo", "build", "--release"
     lib.install "target/release/libself_omemo.dylib"
     include.install "self_omemo.h"
   end
-
-  # rubocop:enable FormulaAudit
 
   test do
     system "true"
